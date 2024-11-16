@@ -56,6 +56,8 @@
   },
   "settings": {
     "repo-url": "एक्सटेंशन रिपॉजिटरी URL",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "repo-url-subtitle": "एक्सटेंशन्स के लिए रिपॉजिटरी URL प्राप्त करें",
     "tmdb-key": "TMDB API कुंजी",
     "tmdb-key-subtitle": "TMDB मेटाडेटा के लिए API कुंजी प्राप्त करें",

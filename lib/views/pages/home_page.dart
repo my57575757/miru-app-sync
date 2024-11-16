@@ -6,6 +6,7 @@ import 'package:miru_app/views/widgets/home/home_favorites.dart';
 import 'package:miru_app/views/widgets/home/home_recent.dart';
 import 'package:miru_app/utils/i18n.dart';
 import 'package:miru_app/views/widgets/platform_widget.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildContent() {
     return Obx(
-      () {
+          () {
         if (c.resents.isEmpty &&
             c.favorites.values.every((element) => element.isEmpty)) {
           return Center(
@@ -54,6 +55,12 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // fluent.IconButton(
+                //     icon: const Icon(fluent.FluentIcons.refresh),
+                //     onPressed: () {
+                //       Get.find<HomePageController>().onRefresh();
+                //     }),
+                // const SizedBox(width: 8),
                 if (c.resents.isNotEmpty) ...[
                   HomeRecent(
                     data: c.resents,
@@ -86,6 +93,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("common.home".i18n),
+        leading: IconButton(
+          icon: const Icon(fluent.FluentIcons.refresh),
+        onPressed: () {
+          Get.find<HomePageController>().onRefresh();
+        }),
       ),
       body: _buildContent(),
     );

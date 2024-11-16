@@ -73,6 +73,8 @@
     "theme-system": "跟隨系统",
     "theme-light": "浅色",
     "theme-dark": "深色",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "theme-black": "黑色",
     "nsfw": "NSFW",
     "nsfw-subtitle": "顯示成人内容",

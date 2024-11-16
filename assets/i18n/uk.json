@@ -75,6 +75,8 @@
     "theme-dark": "Темна",
     "theme-black": "Чорна",
     "nsfw": "NSFW",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "nsfw-subtitle": "Показувати NSFW контент",
     "external-player": "Переважний відеоплеєр",
     "external-player-subtitle": "На даний момент переважним відеоплеєром є {player}",

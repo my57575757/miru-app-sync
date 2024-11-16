@@ -1,9 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:miru_app/models/history.dart';
 import 'package:miru_app/views/widgets/home/home_resent_card.dart';
 import 'package:miru_app/utils/i18n.dart';
 import 'package:miru_app/views/widgets/platform_widget.dart';
+
+import '../../../controllers/home_controller.dart';
 
 class HomeRecent extends StatefulWidget {
   const HomeRecent({
@@ -58,6 +62,12 @@ class _HomeRecentState extends State<HomeRecent> {
             ),
             Row(
               children: [
+                fluent.IconButton(
+                    icon: const Icon(fluent.FluentIcons.refresh),
+                    onPressed: () {
+                      Get.find<HomePageController>().onRefresh();
+                    }),
+                const SizedBox(width: 8),
                 fluent.IconButton(
                     icon: const Icon(fluent.FluentIcons.chevron_left),
                     onPressed: () {

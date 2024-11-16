@@ -2107,3 +2107,42 @@ extension HistoryQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+History _$HistoryFromJson(Map<String, dynamic> json) => History()
+  ..id = int.parse(json['id'] as String)
+  ..package = json['package'] as String
+  ..url = json['url'] as String
+  ..cover = json['cover'] as String?
+  ..type = $enumDecode(_$ExtensionTypeEnumMap, json['type'])
+  ..episodeGroupId = int.parse(json['episodeGroupId'] as String)
+  ..episodeId = int.parse(json['episodeId'] as String)
+  ..title = json['title'] as String
+  ..episodeTitle = json['episodeTitle'] as String
+  ..progress = json['progress'] as String
+  ..totalProgress = json['totalProgress'] as String
+  ..date = DateTime.parse(json['date'] as String);
+
+Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
+      'id': instance.id,
+      'package': instance.package,
+      'url': instance.url,
+      'cover': instance.cover,
+      'type': _$ExtensionTypeEnumMap[instance.type]!,
+      'episodeGroupId': instance.episodeGroupId,
+      'episodeId': instance.episodeId,
+      'title': instance.title,
+      'episodeTitle': instance.episodeTitle,
+      'progress': instance.progress,
+      'totalProgress': instance.totalProgress,
+      'date': instance.date.toIso8601String(),
+    };
+
+const _$ExtensionTypeEnumMap = {
+  ExtensionType.manga: 'manga',
+  ExtensionType.bangumi: 'bangumi',
+  ExtensionType.fikushon: 'fikushon',
+};

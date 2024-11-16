@@ -104,6 +104,8 @@
     "repo-url-subtitle": "Get the repository URL for extensions",
     "tmdb-key": "TMDB API Key",
     "tmdb-key-subtitle": "Get API Key for TMDB metadata",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "bt-server": "BT Server",
     "bt-server-subtitle": "BT Server is a necessary component for online playback of torrent",
     "bt-server-manager": "Manage",

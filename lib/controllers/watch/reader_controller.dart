@@ -7,6 +7,8 @@ import 'package:miru_app/controllers/home_controller.dart';
 import 'package:miru_app/data/services/database_service.dart';
 import 'package:miru_app/data/services/extension_service.dart';
 
+import 'package:miru_app/data/services/syncdatabase_service.dart';
+
 class ReaderController<T> extends GetxController {
   final String title;
   final List<ExtensionEpisode> playList;
@@ -65,7 +67,7 @@ class ReaderController<T> extends GetxController {
   }
 
   addHistory(String progress, String totalProgress) async {
-    await DatabaseService.putHistory(
+    await SyncDatabaseService.putHistory(
       History()
         ..url = detailUrl
         ..episodeId = index.value
@@ -78,6 +80,6 @@ class ReaderController<T> extends GetxController {
         ..totalProgress = totalProgress
         ..cover = cover,
     );
-    await Get.find<HomePageController>().onRefresh();
+    // await Get.find<HomePageController>().onRefresh();
   }
 }

@@ -19,6 +19,8 @@ import 'package:miru_app/views/widgets/cache_network_image.dart';
 import 'package:miru_app/views/widgets/platform_widget.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import 'package:miru_app/data/services/syncdatabase_service.dart';
+
 class HomeRecentCard extends StatefulWidget {
   const HomeRecentCard({
     super.key,
@@ -82,7 +84,7 @@ class _HomeRecentCardState extends State<HomeRecentCard> {
   }
 
   _delete() async {
-    await DatabaseService.deleteHistoryByPackageAndUrl(
+    await SyncDatabaseService.deleteHistoryByPackageAndUrl(
       widget.history.package,
       widget.history.url,
     );
@@ -90,7 +92,7 @@ class _HomeRecentCardState extends State<HomeRecentCard> {
   }
 
   _delectAll() async {
-    await DatabaseService.deleteAllHistory();
+    await SyncDatabaseService.deleteAllHistory();
     Get.find<HomePageController>().refreshHistory();
   }
 

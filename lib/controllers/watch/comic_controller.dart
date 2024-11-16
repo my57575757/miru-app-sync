@@ -9,6 +9,8 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:miru_app/utils/miru_storage.dart';
 
+import 'package:miru_app/data/services/syncdatabase_service.dart';
+
 class ComicController extends ReaderController<ExtensionMangaWatch> {
   ComicController({
     required super.title,
@@ -74,7 +76,7 @@ class ComicController extends ReaderController<ExtensionMangaWatch> {
 
       isRecover.value = true;
       // 获取上次阅读的页码
-      final history = await DatabaseService.getHistoryByPackageAndUrl(
+      final history = await SyncDatabaseService.getHistoryByPackageAndUrl(
         super.runtime.extension.package,
         super.detailUrl,
       );

@@ -72,6 +72,8 @@
     "video-player": "Reproductor de vídeo",
     "video-player-subtitle": "Servidor BT, reproductor externo...",
     "comic-reader": "Lector de cómics",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "comic-reader-subtitle": "Modo de lector predeterminado...",
     "tracking": "Siguiendo",
     "tracking-subtitle": "AniList...",

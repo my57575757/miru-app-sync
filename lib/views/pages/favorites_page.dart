@@ -9,6 +9,8 @@ import 'package:miru_app/views/widgets/extension_item_card.dart';
 import 'package:miru_app/views/widgets/platform_widget.dart';
 import 'package:miru_app/views/widgets/progress.dart';
 
+import 'package:miru_app/data/services/syncdatabase_service.dart';
+
 class FavoritesPage extends fluent.StatefulWidget {
   const FavoritesPage({super.key, required this.type});
   final ExtensionType type;
@@ -32,7 +34,7 @@ class _FavoritesPageState extends fluent.State<FavoritesPage> {
         ),
       ),
       body: FutureBuilder(
-        future: DatabaseService.getFavoritesByType(type: widget.type),
+        future: SyncDatabaseService.getFavoritesByType(type: widget.type),
         builder: ((context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -109,7 +111,7 @@ class _FavoritesPageState extends fluent.State<FavoritesPage> {
           const SizedBox(height: 16),
           Expanded(
             child: FutureBuilder(
-              future: DatabaseService.getFavoritesByType(type: widget.type),
+              future: SyncDatabaseService.getFavoritesByType(type: widget.type),
               builder: ((context, snapshot) {
                 if (snapshot.hasError) {
                   return Center(

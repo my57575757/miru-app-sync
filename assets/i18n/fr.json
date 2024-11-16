@@ -65,6 +65,8 @@
     "repo-url-subtitle": "Obtenir l'URL du Dépôt d'Extensions",
     "tmdb-key": "Clé API TMDB",
     "tmdb-key-subtitle": "Obtenir la clé API TMDB",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "bt-server": "Serveur BT",
     "bt-server-subtitle": "Le serveur BT est un composant nécessaire à la lecture en ligne des torrents.",
     "bt-server-manager": "Gérer",

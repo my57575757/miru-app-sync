@@ -84,6 +84,8 @@
     "repo-url": "扩展仓库地址",
     "repo-url-subtitle": "获取扩展的仓库地址",
     "tmdb-key": "TMDB API Key",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "tmdb-key-subtitle": "获取 TMDB 元数据的 API Key",
     "bt-server": "BT Server",
     "bt-server-subtitle": "在线播放 BT 种子的必要组件",

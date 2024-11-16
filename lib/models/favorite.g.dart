@@ -1376,3 +1376,32 @@ extension FavoriteQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Favorite _$FavoriteFromJson(Map<String, dynamic> json) => Favorite()
+  ..id = int.parse(json['id'] as String)
+  ..package = json['package'] as String
+  ..url = json['url'] as String
+  ..type = $enumDecode(_$ExtensionTypeEnumMap, json['type'])
+  ..title = json['title'] as String
+  ..cover = json['cover'] as String?
+  ..date = DateTime.parse(json['date'] as String);
+
+Map<String, dynamic> _$FavoriteToJson(Favorite instance) => <String, dynamic>{
+      'id': instance.id,
+      'package': instance.package,
+      'url': instance.url,
+      'type': _$ExtensionTypeEnumMap[instance.type]!,
+      'title': instance.title,
+      'cover': instance.cover,
+      'date': instance.date.toIso8601String(),
+    };
+
+const _$ExtensionTypeEnumMap = {
+  ExtensionType.manga: 'manga',
+  ExtensionType.bangumi: 'bangumi',
+  ExtensionType.fikushon: 'fikushon',
+};

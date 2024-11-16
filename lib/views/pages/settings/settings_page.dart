@@ -88,6 +88,43 @@ class _SettingsPageState extends State<SettingsPage> {
                 return MiruStorage.getSetting(SettingKey.tmdbKey);
               },
             ),
+            // 同步数据地址 设置
+            SettingsIntpuTile(
+              title: 'sync-address'.i18n,
+              buildSubtitle: () {
+                final key =
+                MiruStorage.getSetting(SettingKey.syncAddress) as String;
+                if (key.isEmpty) {
+                  return 'common.unset'.i18n;
+                }
+                return key;
+              },
+              onChanged: (value) {
+                MiruStorage.setSetting(SettingKey.syncAddress, value);
+              },
+              buildText: () {
+                return MiruStorage.getSetting(SettingKey.syncAddress);
+              },
+            ),
+            // 同步数据账号 设置
+            SettingsIntpuTile(
+              title: 'sync-user'.i18n,
+              buildSubtitle: () {
+                final key =
+                MiruStorage.getSetting(SettingKey.syncUser) as String;
+                if (key.isEmpty) {
+                  return 'common.unset'.i18n;
+                }
+                // 替换为*号
+                return key;
+              },
+              onChanged: (value) {
+                MiruStorage.setSetting(SettingKey.syncUser, value);
+              },
+              buildText: () {
+                return MiruStorage.getSetting(SettingKey.syncUser);
+              },
+            ),
             // 语言设置
             SettingsRadiosTile(
               title: 'settings.language'.i18n,

@@ -63,6 +63,8 @@
     "bt-server-subtitle": "BTサーバーは、BTシードのオンライン再生に必要なコンポーネントです",
     "bt-server-manager": "マネージャー",
     "upgrade": "ソフトウェアを更新",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "upgrade-subtitle": "バージョン： {version}",
     "upgrade-training": "チェック",
     "auto-check-update": "自動的に更新をチェックする",

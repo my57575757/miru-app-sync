@@ -9,6 +9,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_windows_webview/flutter_windows_webview.dart';
 import 'package:get/get.dart';
 import 'package:miru_app/data/providers/tmdb_provider.dart';
+import 'package:miru_app/data/services/syncdatabase_service.dart';
 import 'package:miru_app/models/index.dart';
 import 'package:miru_app/views/dialogs/tmdb_binding.dart';
 import 'package:miru_app/controllers/home_controller.dart';
@@ -250,30 +251,34 @@ class DetailPageController extends GetxController {
   }
 
   getRemoteTMDBDetail({int? id, String? mediaType}) async {
-    if (id != null && mediaType != null) {
-      tmdbDetail = await TmdbApi.getDetail(id, mediaType);
-      if (tmdbDetail == null) {
-        return;
+    try{
+      if (id != null && mediaType != null) {
+        tmdbDetail = await TmdbApi.getDetail(id, mediaType);
+        if (tmdbDetail == null) {
+          return;
+        }
+      } else {
+        tmdbDetail = await TmdbApi.getDetailBySearch(detail!.title);
+        if (tmdbDetail == null) {
+          return;
+        }
       }
-    } else {
-      tmdbDetail = await TmdbApi.getDetailBySearch(detail!.title);
-      if (tmdbDetail == null) {
-        return;
-      }
+      _tmdbID = await DatabaseService.putTMDBDetail(
+        tmdbDetail!.id,
+        tmdbDetail!,
+        tmdbDetail!.mediaType,
+      );
+      // 更新 id
+      await DatabaseService.putMiruDetail(
+        package,
+        url,
+        detail!,
+        tmdbID: _tmdbID,
+        anilistID: aniListID.value,
+      );
+    }catch(e){
+      print(e);
     }
-    _tmdbID = await DatabaseService.putTMDBDetail(
-      tmdbDetail!.id,
-      tmdbDetail!,
-      tmdbDetail!.mediaType,
-    );
-    // 更新 id
-    await DatabaseService.putMiruDetail(
-      package,
-      url,
-      detail!,
-      tmdbID: _tmdbID,
-      anilistID: aniListID.value,
-    );
   }
 
   saveAniListIds() async {
@@ -287,7 +292,7 @@ class DetailPageController extends GetxController {
 
   getHistory() async {
     // 获取历史记录
-    final history_ = await DatabaseService.getHistoryByPackageAndUrl(
+    final history_ = await SyncDatabaseService.getHistoryByPackageAndUrl(
       package,
       url,
     );
@@ -301,7 +306,7 @@ class DetailPageController extends GetxController {
   }
 
   refreshFavorite() async {
-    isFavorite.value = await DatabaseService.isFavorite(
+    isFavorite.value = await SyncDatabaseService.isFavorite(
       package: package,
       url: url,
     );
@@ -312,7 +317,7 @@ class DetailPageController extends GetxController {
       return;
     }
     try {
-      await DatabaseService.toggleFavorite(
+      await SyncDatabaseService.toggleFavorite(
         package: package,
         url: url,
         cover: detail!.cover,

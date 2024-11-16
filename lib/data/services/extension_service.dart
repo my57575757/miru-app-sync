@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/extensions/fetch.dart';
+import 'package:gbk_codec/gbk_codec.dart';
 import 'package:get/get.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
@@ -19,6 +20,8 @@ import 'package:miru_app/models/index.dart';
 import 'package:miru_app/data/services/database_service.dart';
 import 'package:miru_app/utils/extension.dart';
 import 'package:flutter_js/javascriptcore/jscore_runtime.dart';
+import 'package:dio/src/form_data.dart' as dioFormData;
+
 
 class ExtensionService {
   late JavascriptRuntime runtime;
@@ -68,13 +71,16 @@ class ExtensionService {
     jsRequest(dynamic args) async {
       _cuurentRequestUrl = args[0];
       final headers = args[1]['headers'] ?? {};
+      final isForm = args[1]['isForm'] ?? false;
+      final isGbk = args[1]['isGbk'] ?? false;
+      final isReturnHeader = args[1]['isReturnHeader'] ?? false;
       if (headers['User-Agent'] == null) {
         headers['User-Agent'] = MiruStorage.getUASetting();
       }
 
       final url = args[0];
       final method = args[1]['method'] ?? 'get';
-      final requestBody = args[1]['data'];
+      final requestBody = isForm ? dioFormData.FormData.fromMap(args[1]['data']) : args[1]['data'];
 
       final log = ExtensionNetworkLog(
         extension: extension,
@@ -87,32 +93,56 @@ class ExtensionService {
         key,
         log,
       );
-
+      final contentType = isGbk?ContentType("text", "html", charset: "gbk").toString():null;
       try {
-        final res = await dio.request<String>(
-          url,
-          data: requestBody,
-          queryParameters: args[1]['queryParameters'] ?? {},
-          options: Options(
-            headers: headers,
-            method: method,
-          ),
+        final res;
+        if(isGbk){
+          var rs = await dio.get<List<int>>(
+            url,
+            data: requestBody,
+            queryParameters: args[1]['queryParameters'] ?? {},
+            options: Options(
+                headers: headers,
+                method: method,
+                contentType: contentType,
+                responseType: ResponseType.bytes
+            ),
+          );
+          res = rs;
+        }else{
+          res = await dio.request<String>(
+            url,
+            data: requestBody,
+            queryParameters: args[1]['queryParameters'] ?? {},
+            options: Options(
+                headers: headers,
+                method: method,
+                contentType: contentType,
+            ),
+          );
+        }
+        var gbkData = isGbk?gbk_bytes.decode(await res.data as List<int>):await res.data;
+        log.requestHeaders = await res.requestOptions.headers;
+        log.responseBody = await gbkData;
+        var convertedData = Map<String, dynamic>.fromEntries(
+          (await res.headers.map as Map<dynamic, dynamic>).entries.map((entry) => MapEntry(entry.key.toString(), entry.value)),
         );
-        log.requestHeaders = res.requestOptions.headers;
-        log.responseBody = res.data;
-        log.responseHeaders = res.headers.map.map(
+        log.responseHeaders = convertedData.map(
           (key, value) => MapEntry(
             key,
             value.join(';'),
           ),
         );
-        log.statusCode = res.statusCode;
-
+        log.statusCode = await res.statusCode;
         ExtensionUtils.addNetworkLog(
           key,
           log,
         );
-        return res.data;
+        var hw = (log.responseHeaders??{})["set-cookie"]?? "";
+        var split = hw.split(";");
+        hw = split[0];
+        final resStr = gbkData;
+        return resStr;
       } on DioException catch (e) {
         log.url = e.requestOptions.uri.toString();
         log.requestHeaders = e.requestOptions.headers;

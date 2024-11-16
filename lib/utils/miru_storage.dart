@@ -106,6 +106,8 @@ class MiruStorage {
   static _initSettings() async {
     await _initSetting(SettingKey.miruRepoUrl, "https://miru-repo.0n0.dev");
     await _initSetting(SettingKey.tmdbKey, "");
+    await _initSetting(SettingKey.syncUser, "");
+    await _initSetting(SettingKey.syncAddress, "");
     await _initSetting(SettingKey.autoCheckUpdate, true);
     await _initSetting(SettingKey.language, 'en');
     await _initSetting(SettingKey.novelFontSize, 18.0);
@@ -171,6 +173,8 @@ class SettingKey {
   static const theme = "Theme";
   static const miruRepoUrl = "MiruRepoUrl";
   static const tmdbKey = 'TMDBKey';
+  static const syncAddress = 'SyncAddress';
+  static const syncUser = 'SyncUser';
   static const autoCheckUpdate = 'AutoCheckUpdate';
   static const language = 'Language';
   static const novelFontSize = 'NovelFontSize';

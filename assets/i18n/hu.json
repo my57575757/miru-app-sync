@@ -91,6 +91,8 @@
         "extension-subtitle": "Bővítmény repository",
         "video-player": "Video Lejátszó",
         "video-player-subtitle": "BT Szerver, Külső Lejátszó...",
+        "sync-address": "同步服务器",
+        "sync-user": "同步账号",
         "comic-reader": "Képregényolvasó",
         "comic-reader-subtitle": "Alapértelmezett olvasó mód...",
         "tracking": "Trackelés",

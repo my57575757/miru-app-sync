@@ -38,6 +38,8 @@ import 'package:crypto/crypto.dart';
 import 'package:miru_app/utils/miru_storage.dart';
 import 'package:flutter_hls_parser/flutter_hls_parser.dart';
 
+import 'package:miru_app/data/services/syncdatabase_service.dart';
+
 class VideoPlayerController extends GetxController {
   final String title;
   final List<ExtensionEpisode> playList;
@@ -305,7 +307,7 @@ class VideoPlayerController extends GetxController {
       }
 
       // 获取上次播放进度
-      final history = await DatabaseService.getHistoryByPackageAndUrl(
+      final history = await SyncDatabaseService.getHistoryByPackageAndUrl(
         runtime.extension.package,
         detailUrl,
       );
@@ -652,7 +654,7 @@ class VideoPlayerController extends GetxController {
 
     logger.info('save history');
 
-    await DatabaseService.putHistory(
+    await SyncDatabaseService.putHistory(
       History()
         ..url = detailUrl
         ..cover = file.path

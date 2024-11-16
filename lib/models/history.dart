@@ -1,9 +1,11 @@
 import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:miru_app/models/extension.dart';
 
 part 'history.g.dart';
 
 @collection
+@JsonSerializable()
 class History {
   Id id = Isar.autoIncrement;
   @Index(name: 'package&url', composite: [CompositeIndex('url')])
@@ -26,4 +28,9 @@ class History {
   // 当前章节/剧集总进度
   late String totalProgress;
   DateTime date = DateTime.now();
+  History();
+  factory History.fromJson(Map<String, dynamic> json) =>
+      _$HistoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HistoryToJson(this);
 }

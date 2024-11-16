@@ -59,6 +59,8 @@
     "repo-url-subtitle": "Атрымаць URL рэпазітара для пашырэнняў",
     "tmdb-key": "Ключ API TMDB",
     "tmdb-key-subtitle": "Атрымаць ключ API для метададзеных TMDB",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "bt-server": "Сервер BT",
     "bt-server-subtitle": "Сэрвер BT гэта неабходны кампанент для онлайн-выканання торэнтаў",
     "bt-server-manager": "Кіраваць",

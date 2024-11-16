@@ -73,6 +73,8 @@
     "comic-reader-subtitle": "Domyślny tryb czytnika...",
     "tracking": "Śledzenie postępu",
     "tracking-subtitle": "AniList...",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "auto-tracking": "Automatyczne śledzenie postępu",
     "auto-tracking-subtitle": "Automatycznie synchronizuj postęp po zakończeniu oglądania / czytania",
     "about": "O aplikacji",

@@ -71,6 +71,8 @@
     "general": "General",
     "general-subtitle": "TMDB, Bahasa, Tema, periksa untuk update...",
     "extension": "Ekstensi",
+    "sync-address": "同步服务器",
+    "sync-user": "同步账号",
     "extension-subtitle": "Ekstensi repository",
     "video-player": "Pemutar video",
     "video-player-subtitle": "Server BT, Pemutar Eksternal...",
