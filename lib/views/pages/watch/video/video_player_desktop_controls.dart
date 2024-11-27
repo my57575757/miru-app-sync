@@ -267,6 +267,12 @@ class _VideoPlayerDesktopControlsState
   }
 }
 
+extension on SubtitleViewState? {
+  set style(TextStyle style) {}
+
+  set textAlign(TextAlign textAlign) {}
+}
+
 class _Header extends StatefulWidget {
   const _Header({
     required this.title,

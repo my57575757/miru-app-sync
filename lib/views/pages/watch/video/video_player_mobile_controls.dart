@@ -464,6 +464,12 @@ class _VideoPlayerMobileControlsState extends State<VideoPlayerMobileControls> {
   }
 }
 
+extension on SubtitleViewState? {
+  set style(TextStyle style) {}
+
+  set textAlign(TextAlign textAlign) {}
+}
+
 class _Header extends StatelessWidget {
   const _Header({required this.controller});
   final VideoPlayerController controller;
